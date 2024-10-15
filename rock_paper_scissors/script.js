@@ -9,7 +9,7 @@ const scissors = document.querySelector("#scissors");
 const play = document.querySelector("#player");
 const comp = document.querySelector("#computer");
 const currentStatus = document.querySelector("#currentStatus");
-rock.addEventListener("click", (e) => {
+rock.addEventListener("click", () => {
     playGame("rock")
 })
 paper.addEventListener("click", () => {
