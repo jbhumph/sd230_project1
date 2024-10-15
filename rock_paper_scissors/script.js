@@ -9,7 +9,6 @@ const scissors = document.querySelector("#scissors");
 const play = document.querySelector("#player");
 const comp = document.querySelector("#computer");
 const currentStatus = document.querySelector("#currentStatus");
-
 rock.addEventListener("click", (e) => {
     playGame("rock")
 })
@@ -21,6 +20,7 @@ scissors.addEventListener("click", () => {
 })
 
 function getRandom() {
+    // create a random number that then returns RPS
     let number = Math.floor(Math.random() * 3)
     if (number === 0) {
         return "rock";
@@ -32,6 +32,7 @@ function getRandom() {
 }
 
 function playGame(choice) {
+    // primary game logic
     player = choice;
     computer = getRandom()
 
