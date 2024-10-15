@@ -6,6 +6,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <h1>Currency Converter</h1>
+    <div class="converter">
+        <h3>Converter</h3>
+        <div class="text">This application converts the currency value from one country to another. Choose two countries and input a value to get started!</div>
+        <form>
+            <label for="start">Convert To:</label><br>
+            <label for="start">Example: AUD</label><br>
+            <input type="text" id="start" value=""><br>
+            <label for="end">Convert From:</label><br>
+            <label for="start">Example: AUD</label><br>
+            <input type="text" id="end" value=""><br>
+            <label for="amount">From Amount:</label><br>
+            <label for="start">Example: 500</label><br>
+            <input type="text" id="amount" value=""><br><br>
+            <input type="submit" value="submit">
+        </form>
+        <div class="converted">
+            <h4>Converted Currency:</h4>
+            <div class="result">Please make a submission</div>
+        </div>
+    </div>
+    <br><br>
+    <div class="lookup">
+        <h3>Currency Code Lookup</h3>
+        <div class="text">This will help look up a country's currency code or find out what country a currency code belongs to.</div>
+        <div class="text">Enter a valid code (ie: AUD) or a valid country (ie: Australia)</div>
+        <form>
+            <label for="lookup">Lookup:</label><br>
+            <input type="text" id="lookup" value=""><br>
+            <input type="submit" value="submit">
+        </form>
+        <div class="results">
+            <h4>Lookup Results:</h4>
+            <div class="result">Please make a submission</div>
+        </div>
+    </div>
 </body>
 </html>
