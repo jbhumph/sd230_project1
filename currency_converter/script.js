@@ -2,11 +2,19 @@ const startValue = document.querySelector("#start");
 const endValue = document.querySelector("#end");
 const amountValue = document.querySelector("#amount");
 const submit = document.querySelector("#submit");
+const submitB = document.querySelector("#submitLookup");
+const look = document.querySelector("#lookup");
 const result = document.querySelector(".result");
+const lookupResult = document.querySelector(".lookupResult");
 
 submit.addEventListener("click", (e) => {
     e.preventDefault();
     convert(startValue.value.toUpperCase(), endValue.value.toUpperCase(), amountValue.value);
+})
+
+submitB.addEventListener("click", (e) => {
+    e.preventDefault();
+    lookup(look.value)
 })
 
 const exchangeRates = {
@@ -41,17 +49,17 @@ const knownSymbols = {
         "ZAR": "South African Rand"
     },
     "countries": {
-        "Australia": "AUD",
-        "Canada": "CAD",
-        "Chile": "CLP",
-        "China": "CNY",
-        "Euro": "EUR",
-        "Britain": "GBP",
-        "India": "INR",
-        "Japan": "JPY",
-        "Russia": "Ruble",
-        "United States": "USD",
-        "South Africa": "ZAR"
+        "australia": "AUD",
+        "canada": "CAD",
+        "chile": "CLP",
+        "china": "CNY",
+        "euro": "EUR",
+        "britain": "GBP",
+        "india": "INR",
+        "japan": "JPY",
+        "russia": "Ruble",
+        "united states": "USD",
+        "south africa": "ZAR"
     }
 }
 
@@ -81,5 +89,16 @@ function validate(start, end, value) {
         return false;
     } else {
         return true;
+    }
+}
+
+function lookup(input) {
+    // checks against known symbols object and updates DOM
+    if (knownSymbols.symbols.hasOwnProperty(input.toUpperCase())) {
+        lookupResult.textContent = `${input.toUpperCase()} = ${knownSymbols.symbols[input.toUpperCase()]}`;
+    } else if (knownSymbols.countries.hasOwnProperty(input.toLowerCase())) {
+        lookupResult.textContent = `${input.toLowerCase()} = ${knownSymbols.countries[input.toLowerCase()]}`;
+    } else {
+        lookupResult.textContent = "No results found.";
     }
 }
