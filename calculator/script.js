@@ -1,3 +1,5 @@
+const line = document.querySelector(".line");
+
 // add variables for each button
 const one = document.querySelector("#one");
 const two = document.querySelector("#two");
@@ -16,7 +18,9 @@ const multiply = document.querySelector("#multiply");
 const divide = document.querySelector("#divide");
 const equals = document.querySelector("#equals");
 
-let arr = [];
+let arr = [""];
+let index = 0
+let display = ""
 
 
 // add event listeners
@@ -64,15 +68,66 @@ divide.addEventListener("click", () => {
     writeOperator("/")
 })
 equals.addEventListener("click", () => {
-
+    solve()
 })
 
 
 // function that creates strings in array
 function writeNumber(num) {
-
+    if (num === "0" && arr[index] === "") {
+        return;
+    }
+    arr[index] += num;
+    display += num;
+    line.innerText = display;
 }
 
 function writeOperator(op) {
+    if (arr[index] === "") {
+        return;
+    }
+    index++
+    arr[index] = op;
+    index++
+    arr[index] = "";
 
+    display += op;
+    line.innerText = display;
+}
+
+function solve() {
+    if (arr.length < 3) {
+        return;
+    }
+    // multiplication
+    arr = multiplication(arr);
+    arr = division(arr);
+
+
+
+    line.innerText = arr;
+
+
+}
+
+function multiplication(array) {
+    if (array.indexOf("*") === -1) {
+        return array;
+    } else {
+        let i = array.indexOf("*");
+        let math = array[i-1] * array[i+1];
+        array.splice(i-1, 3, math.toString())
+        return multiplication(array);
+    }
+}
+
+function division(array) {
+    if (array.indexOf("/") === -1) {
+        return array;
+    } else {
+        let i = array.indexOf("/");
+        let math = array[i-1] / array[i+1];
+        array.splice(i-1, 3, math.toString())
+        return division(array);
+    }
 }
