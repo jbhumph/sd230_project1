@@ -99,13 +99,16 @@ function solve() {
     if (arr.length < 3) {
         return;
     }
-    // multiplication
+    // PEMDAS
     arr = multiplication(arr);
     arr = division(arr);
+    arr = addition(arr);
+    arr = subtraction(arr);
 
-
-
-    line.innerText = arr;
+    index = 0;
+    console.log(arr);
+    display = arr[0]
+    line.innerText = display;
 
 
 }
@@ -129,5 +132,27 @@ function division(array) {
         let math = array[i-1] / array[i+1];
         array.splice(i-1, 3, math.toString())
         return division(array);
+    }
+}
+
+function addition(array) {
+    if (array.indexOf("+") === -1) {
+        return array;
+    } else {
+        let i = array.indexOf("+");
+        let math = Number(array[i-1]) + Number(array[i+1]);
+        array.splice(i-1, 3, math.toString())
+        return addition(array);
+    }
+}
+
+function subtraction(array) {
+    if (array.indexOf("-") === -1) {
+        return array;
+    } else {
+        let i = array.indexOf("-");
+        let math = Number(array[i-1]) - Number(array[i+1]);
+        array.splice(i-1, 3, math.toString())
+        return subtraction(array);
     }
 }
