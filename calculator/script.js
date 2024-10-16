@@ -16,6 +16,7 @@ const plus = document.querySelector("#plus");
 const minus = document.querySelector("#minus");
 const multiply = document.querySelector("#multiply");
 const divide = document.querySelector("#divide");
+const decimal = document.querySelector("#decimal");
 const equals = document.querySelector("#equals");
 
 let arr = [""];
@@ -67,6 +68,9 @@ multiply.addEventListener("click", () => {
 divide.addEventListener("click", () => {
     writeOperator("/")
 })
+decimal.addEventListener("click", () => {
+    writeDecimal()
+})
 equals.addEventListener("click", () => {
     solve()
 })
@@ -80,6 +84,21 @@ function writeNumber(num) {
     arr[index] += num;
     display += num;
     line.innerText = display;
+}
+
+function writeDecimal() {
+    if (arr[index].includes(".")) {
+        return;
+    }
+    if (arr[index] === "") {
+        arr[index] = "0.";
+        display += "0."
+        line.innerText = display;
+    } else {
+        arr[index] += ".";
+        display += "."
+        line.innerText = display;
+    }
 }
 
 function writeOperator(op) {
