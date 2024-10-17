@@ -11,20 +11,18 @@ const seven = document.querySelector("#seven");
 const eight = document.querySelector("#eight");
 const nine = document.querySelector("#nine");
 const zero = document.querySelector("#zero");
-
 const plus = document.querySelector("#plus");
 const minus = document.querySelector("#minus");
 const multiply = document.querySelector("#multiply");
 const divide = document.querySelector("#divide");
+const exponent = document.querySelector("#exponent");
 const decimal = document.querySelector("#decimal");
 const pOpen = document.querySelector("#pOpen");
 const pClose = document.querySelector("#pClose");
 const equals = document.querySelector("#equals");
-
 let arr = [""];
 let index = 0
 let display = ""
-
 let openCount = 0;
 let closedCount = 0;
 
@@ -73,6 +71,9 @@ multiply.addEventListener("click", () => {
 divide.addEventListener("click", () => {
     writeOperator("/")
 })
+exponent.addEventListener("click", () => {
+    writeOperator("^")
+})
 decimal.addEventListener("click", () => {
     writeDecimal()
 })
@@ -87,8 +88,8 @@ equals.addEventListener("click", () => {
 })
 
 
-// function that creates strings in array
 function writeNumber(num) {
+    // function that creates strings in array
     if (num === "0" && arr[index] === "") {
         return;
     }
@@ -98,6 +99,7 @@ function writeNumber(num) {
 }
 
 function writeDecimal() {
+    // writes decimal in array
     if (arr[index].includes(".")) {
         return;
     }
@@ -113,6 +115,7 @@ function writeDecimal() {
 }
 
 function open() {
+    // opens parenthesis in array
     if (arr[index] === "") {
         arr[index] = "(";
         index++
@@ -124,24 +127,18 @@ function open() {
 }
 
 function close() {
+    // closes parenthesis in array and flattens them into a sub-array
     if (arr[index] !== "" && openCount > closedCount) {
         let i = arr.lastIndexOf("(");
         let temp = arr.slice(i+1);
         arr.splice(i, temp.length+1, temp);
-        let newest = []
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i] != null) {
-                newest.push(arr[i]);
-            }
-        }
-        arr = newest;
-
         display += ")";
         line.innerText = display;
     }
 }
 
 function writeOperator(op) {
+    // adds operators to array
     if (arr[index] === "") {
         return;
     }
@@ -155,7 +152,10 @@ function writeOperator(op) {
 }
 
 function solve() {
+    // runs through each element of array and performs operator functions, eventually displaying result
+
     // the close() function's splice left null elements in the array and this is part of my solution to that.
+    // for some reason I can only remove the null elements from here, not when they're at the end of the array in close()
     let newest = arr.filter(item => item !== null);
     arr = newest;
 
@@ -168,6 +168,7 @@ function solve() {
             //arr.splice(i, 1, hold);
         }
     }
+    arr = exponents(arr)
     arr = multiplication(arr);
     arr = division(arr);
     arr = addition(arr);
@@ -178,11 +179,13 @@ function solve() {
 }
 
 function solved(array) {
+    // recursive call to solve sub-arrays (parenthesis)
     for (let i = 0; i < array.length; i++) {
         if (Array.isArray(array[i])) {
             array[i] = solved(array[i]).toString();
         }
     }
+    array = exponents(array)
     array = multiplication(array);
     array = division(array);
     array = addition(array);
@@ -190,7 +193,20 @@ function solved(array) {
     return array;
 }
 
+function exponents(array) {
+    // recursive call to solve all exponents
+    if (array.indexOf("^") === -1) {
+        return array;
+    } else {
+        let i = array.indexOf("^");
+        let math = Math.pow(array[i-1], array[i+1]);
+        array.splice(i-1, 3, math.toString())
+        return exponents(array);
+    }
+}
+
 function multiplication(array) {
+    // recursive call to solve all multiplication
     if (array.indexOf("*") === -1) {
         return array;
     } else {
@@ -202,6 +218,7 @@ function multiplication(array) {
 }
 
 function division(array) {
+    // recursive call to solve all division
     if (array.indexOf("/") === -1) {
         return array;
     } else {
@@ -213,6 +230,7 @@ function division(array) {
 }
 
 function addition(array) {
+    // recursive call to solve all addition
     if (array.indexOf("+") === -1) {
         return array;
     } else {
@@ -224,6 +242,7 @@ function addition(array) {
 }
 
 function subtraction(array) {
+    // recursive call to solve all subtraction
     if (array.indexOf("-") === -1) {
         return array;
     } else {
