@@ -17,11 +17,16 @@ const minus = document.querySelector("#minus");
 const multiply = document.querySelector("#multiply");
 const divide = document.querySelector("#divide");
 const decimal = document.querySelector("#decimal");
+const pOpen = document.querySelector("#pOpen");
+const pClose = document.querySelector("#pClose");
 const equals = document.querySelector("#equals");
 
 let arr = [""];
 let index = 0
 let display = ""
+
+let openCount = 0;
+let closedCount = 0;
 
 
 // add event listeners
@@ -71,8 +76,14 @@ divide.addEventListener("click", () => {
 decimal.addEventListener("click", () => {
     writeDecimal()
 })
+pOpen.addEventListener("click", () => {
+    open()
+})
+pClose.addEventListener("click", () => {
+    close()
+})
 equals.addEventListener("click", () => {
-    solve()
+    solve();
 })
 
 
@@ -101,6 +112,35 @@ function writeDecimal() {
     }
 }
 
+function open() {
+    if (arr[index] === "") {
+        arr[index] = "(";
+        index++
+        arr[index] = "";
+        display += "(";
+        line.innerText = display;
+        openCount++;
+    }
+}
+
+function close() {
+    if (arr[index] !== "" && openCount > closedCount) {
+        let i = arr.lastIndexOf("(");
+        let temp = arr.slice(i+1);
+        arr.splice(i, temp.length+1, temp);
+        let newest = []
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                newest.push(arr[i]);
+            }
+        }
+        arr = newest;
+
+        display += ")";
+        line.innerText = display;
+    }
+}
+
 function writeOperator(op) {
     if (arr[index] === "") {
         return;
@@ -115,21 +155,39 @@ function writeOperator(op) {
 }
 
 function solve() {
+    // the close() function's splice left null elements in the array and this is part of my solution to that.
+    let newest = arr.filter(item => item !== null);
+    arr = newest;
+
     if (arr.length < 3) {
         return;
     }
-    // PEMDAS
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            arr[i] = solved(arr[i]).toString();
+            //arr.splice(i, 1, hold);
+        }
+    }
     arr = multiplication(arr);
     arr = division(arr);
     arr = addition(arr);
     arr = subtraction(arr);
-
     index = 0;
-    console.log(arr);
     display = arr[0]
     line.innerText = display;
+}
 
-
+function solved(array) {
+    for (let i = 0; i < array.length; i++) {
+        if (Array.isArray(array[i])) {
+            array[i] = solved(array[i]).toString();
+        }
+    }
+    array = multiplication(array);
+    array = division(array);
+    array = addition(array);
+    array = subtraction(array);
+    return array;
 }
 
 function multiplication(array) {
