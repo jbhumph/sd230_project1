@@ -7,19 +7,35 @@
 </head>
 <body>
     <h1>Rock Paper Scissors</h1>
-    <div>This is a rock paper scissors game that I am developing for SD230. Press a button to choose either rock, paper, or scissors</div>
+    <div id="intro">Welcome to Rock Paper Scissors, a gritty, cyberpunk reimagining of the classic game of chance. In a world where corporate giants rule, power is currency, and survival is a gamble, this game lets you test your instincts against a shadowy AI opponent. Each choice—rock, paper, or scissors—unleashes a digital weapon in a neon-lit arena, where every move could mean survival or deletion. This web app isn’t just a game; it’s a dive into the dark underbelly of a futuristic dystopia, where every click matters, and even the simplest decisions could change your fate. Will you rise or be left in the code dust?</div>
     <div class="game">
         <div class="buttons">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
+            <div class="button" id="rock">
+                <img src="images/rock.jpeg" height="200px">
+            </div>
+            <div class="button" id="paper">
+                <img src="images/paper.jpg" height="200px">
+            </div>
+            <div class="button" id="scissors">
+                <img src="images/scissors.jpg" height="200px">
+            </div>
         </div>
-        <div class="picks">
-            <div id="player">Player =</div>
-            <div id="computer">Computer =</div>
+        <div class="engage">
+            <button id="new_game">New Game</button>
+            <button id="play_button">Play!</button>
+        </div>
+        <div class="feedback">
+            <div class="stats">
+                <div id="pA">Pick rock, paper, or scissors and press play!</div>
+                <div id="pB"></div>
+            </div>
+            <div class="scoreboard">
+                <div id="pAScore">Player: 0</div>
+                <div id="pBScore">Computer: 0</div>
+            </div>
         </div>
         <div class="status">
-            <div id="currentStatus">Take your pick!</div>
+            <div id="currentStatus"></div>
         </div>
     </div>
     <script src="script.js"></script>

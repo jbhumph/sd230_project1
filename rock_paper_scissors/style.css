@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'Ryzes';
+    src: url("assets/Ryzes-ax92x.ttf");
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #01012b;
+    color: #d1f7ff;
+    text-align: center;
+    font-family: "courier", sans-serif;
+    font-size: small;
+}
+
+h1 {
+    font-family: 'Ryzes';
+    font-size: 80px;
+    color: #ff2a6d;
+}
+
+#intro {
+    width: 800px;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 800px;
+    background-color: black;
+    border: 10px solid #005678;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.button {
+    border: 15px solid #005678;
+    border-radius: 10px;
+}
+
+.button:hover {
+    border: 15px solid #d1f7ff;
+}
+
+.selected {
+    border: 15px solid #ff2a6d;
+}
+
+.engage {
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    width: 150px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #01012b;
+    border: 10px solid #005678;
+    border-radius: 10px;
+    color: #005678;
+}
+
+button:hover {
+    border: 10px solid #d1f7ff;
+    color: #d1f7ff;
+}
+
+.lit {
+    background-color: #ff2a6d;
+    color: white;
+}
+
+.feedback {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    height: 80px;
+    margin: 20px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    border: 10px solid #005678;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: #d1f7ff;
+}
+
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 10px solid #005678;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: start;
+    background-color: black;
+    color: #d1f7ff;
+    padding-left: 5px;
+}
+
+#currentStatus {
+    font-family: 'Ryzes';
+    font-size: 80px;
+    color: #d1f7ff;
+}
