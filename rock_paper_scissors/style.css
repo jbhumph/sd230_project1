@@ -122,3 +122,9 @@ button:hover {
     font-size: 80px;
     color: #d1f7ff;
 }
+
+#win_lit {
+    font-family: 'Ryzes';
+    font-size: 80px;
+    color: #ff2a6d;
+}

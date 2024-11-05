@@ -36,6 +36,7 @@ rock.addEventListener("click", () => {
             rock.classList.remove("selected");
             ready = false
             update();
+            countdown();
         }
     }
 
@@ -54,6 +55,7 @@ paper.addEventListener("click", () => {
             paper.classList.remove("selected");
             ready = false
             update();
+            countdown();
         }
     }
 })
@@ -71,6 +73,7 @@ scissors.addEventListener("click", () => {
             scissors.classList.remove("selected");
             ready = false
             update();
+            countdown();
         }
     }
 })
@@ -88,8 +91,11 @@ new_game.addEventListener("click", () => {
         rock.classList.remove("selected")
         paper.classList.remove("selected");
         scissors.classList.remove("selected");
+        currentStatus.id = "currentStatus";
+        currentStatus.innerHTML = "15"
         comp_sel = "tbd";
         update();
+        countdown();
     }
 })
 
@@ -142,6 +148,7 @@ function playGame(choice) {
     update()
     play.classList.remove("lit");
     ready = false;
+    currentStatus.id = "win_lit";
     currentStatus.innerHTML = status;
 }
 
@@ -163,3 +170,40 @@ function update() {
     pAScore.innerText = `Player: ${score_p}`
     pBScore.innerText = `Computer: ${score_c}`
 }
+
+function countdown() {
+    let number = 15;
+    const counter = setInterval(() => {
+        number --;
+        if (number === 4) {
+            currentStatus.innerHTML = "Rock";
+        } else if (number === 3) {
+            currentStatus.innerHTML = "Paper";
+        } else if (number === 2) {
+            currentStatus.innerHTML = "Scissors";
+        } else if (number === 1) {
+            currentStatus.innerHTML = "Shoot!";
+        } else {
+            currentStatus.innerHTML = number.toString();
+        }
+
+        if (selection !== "none") {
+            clearInterval(counter);
+            currentStatus.innerHTML = "Press play!"
+        }
+        if (number <= 0) {
+            clearInterval(counter);
+            selection = getRandom();
+            playGame(selection);
+            if (selection === "scissors") {
+                scissors.classList.add("selected");
+            } else if (selection === "rock") {
+                rock.classList.add("selected");
+            } else if (selection === "paper") {
+                paper.classList.add("selected");
+            }
+        }
+    },1000)
+}
+
+countdown();
